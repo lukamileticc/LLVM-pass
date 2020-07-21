@@ -12,6 +12,7 @@ IR-a(load,store,add,mul...).
   Prvo je potrebno bildovati LLVM ------- http://www.cs.utexas.edu/~pingali/CS380C/2019/assignments/llvm-guide.html
   Zatim je potrebno napraviti direkotrijum koji ima fajlove prolaza : InstructionsCounterIR folder
   i njega ubaciti u llvm/lib/transforms/ folder jer se u to folderu nalaze prolazi LLVM-a...
+  Nakon toga u istom tom folderu postoji fajl CMakeLists.txt gde potrebno dodati liniju add_subdirectory(#ime vaseg foldera u kojem se nalzai prolaz)
   i potrebno je opet se pozicionirati u llvm/build direkotriju i upotrebiti opciju : 
   
   ninja ---- kako bismo dobili .so fajl naseg prolaza kojeg cemo kasnije pozvati 
