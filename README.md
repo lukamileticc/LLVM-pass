@@ -16,7 +16,7 @@ IR-a(load,store,add,mul...).
   ninja ---- kako bismo dobili .so fajl naseg prolaza kojeg cemo kasnije pozvati 
   
   Kada smo to uradili potrebno je prevesti nas program na .ll format
-# Kako dobiti ll fajl: 
+# Kako dobiti .ll fajl: 
 U folderu c_konacni_prevodilac su fajlovi koji predstavljaju prevodilac za neki jezik koji lici na pascal:
 
 pozicionirati se u taj direktorijum i ukucati komandu: make
