@@ -10,7 +10,8 @@ IR-a(load,store,add,mul...).
 
 # Kako ga pokrenuti: 
   Prvo je potrebno bildovati LLVM ------- http://www.cs.utexas.edu/~pingali/CS380C/2019/assignments/llvm-guide.html
-  Zatim je potrebno napraviti direkotrijum koji ima fajlove prolaza : InstructionsCounterIR folder npr.
+  Zatim je potrebno napraviti direkotrijum koji ima fajlove prolaza : InstructionsCounterIR folder
+  i njega ubaciti u llvm/lib/transforms/ folder jer se u to folderu nalaze prolazi LLVM-a...
   i potrebno je opet se pozicionirati u llvm/build direkotriju i upotrebiti opciju : 
   
   ninja ---- kako bismo dobili .so fajl naseg prolaza kojeg cemo kasnije pozvati 
