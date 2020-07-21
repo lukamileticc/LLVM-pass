@@ -1,0 +1,17 @@
+
+function f1(a,b):
+    print(a + b);
+
+function f2():
+    print(-1);
+
+
+begin
+   a := 3;
+   b := 5;
+
+   f1(a,b);
+   f2();
+
+end.
+  

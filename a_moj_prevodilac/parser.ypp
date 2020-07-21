@@ -1,0 +1,72 @@
+%{
+#include <iostream>
+#include <cstdlib>
+
+#define YYDEBUG 1
+using namespace std;
+
+
+void yyerror(string s){
+	cerr << s << endl;
+	exit(EXIT_FAILURE);
+}
+extern int yylex();
+
+%}
+
+%left '-' '+'
+%left '*' '/'
+
+%token print_token begin_token end_token dodela_token function_token num_token id_token
+
+%%
+Program: Blok '.'
+| NizFunkcija Blok '.'
+;
+NizFunkcija: NizFunkcija Funkcija 
+| Funkcija
+;
+Funkcija: function_token Prototip ':' NizNaredbi
+;
+Blok: begin_token NizNaredbi end_token
+;
+NizNaredbi: NizNaredbi Naredba ';'
+| Naredba ';'
+;
+Naredba: print_token '(' E ')'
+| id_token dodela_token E	
+| E
+;
+Prototip: id_token '(' Args1 ')'
+;
+Args1: Args
+| 
+;
+Args: Args ',' id_token
+| id_token
+;
+E : E '+' E
+| 	E '-' E
+|   E '*' E
+| 	E '/' E
+|   '(' E ')'
+|   num_token
+|   id_token
+|   id_token '(' NizArgs ')'
+;
+NizArgs: NizArgs1
+| 
+;
+NizArgs1: NizArgs1 ',' E
+| E
+;
+
+
+%%
+int main() {
+	//yydebug = 1;
+	
+	yyparse();
+
+	return 0;
+}
