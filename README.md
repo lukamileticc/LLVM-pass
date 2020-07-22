@@ -25,7 +25,7 @@ pozicionirati se u taj direktorijum i ukucati komandu: `make`
 
 Napravice se izvrsni fajl koji predstavlja prevodilac
 
-Takodje u tom direktorijumu postoje test primeri: tes1 test2 test3 i test4
+Takodje u tom direktorijumu postoje test primeri: test1 test2 test3 i test4
 
 Kako dobiti kodove u .ll fomatu koji predstavljaju IR(Intermediate representation) LLVM-a:
 
