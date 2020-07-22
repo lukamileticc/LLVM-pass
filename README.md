@@ -1,4 +1,4 @@
-# LLVM-pass
+# ** LLVM-pass **
 Seminarski rad iz predmeta Konstrukcija Kompilatora
 
 ## Sta su to llvm-prolazi(pass-ovi):
