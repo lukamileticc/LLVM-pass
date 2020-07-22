@@ -1,4 +1,4 @@
-# **LLVM-pass**
+# **LLVM-pass** :memo:
 Seminarski rad iz predmeta Konstrukcija Kompilatora
 
 ## Sta su to llvm-prolazi(pass-ovi):
@@ -28,7 +28,7 @@ Takodje u tom direktorijumu postoje test primeri: *test1 test2 test3 i test4* <b
 Kako dobiti kodove u *.ll* fomatu koji predstavljaju IR(Intermediate representation) LLVM-a: <br>
  `./prevodilac < test1 > test1.ll`
 
-## Kako pokrenuti prolaz:
+## Kako pokrenuti prolaz: :wrench:
 Kada imamo kodove na IR jeziku potrebno je pozvati prolaz: <br>
  `opt -load /home/luka/llvm/build/lib/LLVMInstructionsCounterIR.so test1.ll`
 
