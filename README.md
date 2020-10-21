@@ -1,7 +1,7 @@
-# **LLVM-pass** :memo:
+# **LLVM-pass** :memo: 
 Seminarski rad iz predmeta Konstrukcija Kompilatora
 
-## Sta su to llvm-prolazi(pass-ovi):
+## Sta su to llvm-prolazi(pass-ovi): :point_down: :whale:
  Postoje prolazi koji vrse analizu i transformaciju, ja sam napisao jedan koji vrsi analizu.<br>
  Oni se primenjuju na medjureprezentaciji(jezik koji predstavlja sponu <br>
  visokog programskog jezika i masinskog ili asemblerskog jezika koji se izvrsava na masini) <br>
@@ -10,7 +10,7 @@ Seminarski rad iz predmeta Konstrukcija Kompilatora
 Prolaz se nalazi u direkotrijumu ***InstructionsCounterIR*** i samo mu ime govori da racuna <br>
 broj instrukcija koje se pojavljuju u svim blokovima IR-a(*load,store,add,mul*...).
 
-## Kako ga pokrenuti: 
+## Kako ga pokrenuti: :point_down: :whale:
   Prvo je potrebno bildovati LLVM ----[Building LLVM](http://www.cs.utexas.edu/~pingali/CS380C/2019/assignments/llvm-guide.html) <br>
   Zatim je potrebno napraviti direkotrijum koji ima fajlove prolaza : *InstructionsCounterIR folder* <br>
   i njega ubaciti u ***llvm/lib/transforms/*** folder jer se u to folderu nalaze prolazi LLVM-a... <br>
@@ -20,7 +20,7 @@ broj instrukcija koje se pojavljuju u svim blokovima IR-a(*load,store,add,mul*..
   `ninja` ---- kako bismo dobili .so fajl naseg prolaza kojeg cemo kasnije pozvati <br>
   Kada smo to uradili potrebno je prevesti nas program na *.ll* format
   
-## Kako dobiti .ll fajl: 
+## Kako dobiti .ll fajl: :point_down:
 U folderu c_konacni_prevodilac su fajlovi koji predstavljaju *prevodilac* za neki jezik koji lici na pascal: <br>
 Pozicionirati se u taj direktorijum i ukucati komandu: `make` <br>
 Napravice se izvrsni fajl koji predstavlja prevodilac. <br>
@@ -33,4 +33,4 @@ Kada imamo kodove na IR jeziku potrebno je pozvati prolaz: <br>
  `opt -load /home/luka/llvm/build/lib/LLVMInstructionsCounterIR.so test1.ll`
 
 ## Clanovi tima: :boy:
- * Luka Miletic 91/2017
+ * Luka Miletic 91/2017 :whale::whale:
