@@ -24,7 +24,7 @@ broj instrukcija koje se pojavljuju u svim blokovima IR-a(*load,store,add,mul*..
 U folderu c_konacni_prevodilac su fajlovi koji predstavljaju *prevodilac* za neki jezik koji lici na pascal: <br>
 Pozicionirati se u taj direktorijum i ukucati komandu: `make` <br>
 Napravice se izvrsni fajl koji predstavlja prevodilac. <br>
-Takodje u tom direktorijumu postoje test primeri: *test1 test2 test3 i test4* <br>
+U direktorijumu `test_files` postoje test primeri: *test1 test2 test3 i test4* <br>
 Kako dobiti kodove u *.ll* fomatu koji predstavljaju IR(Intermediate representation) LLVM-a: <br>
  `./prevodilac < test1 > test1.ll`
 
