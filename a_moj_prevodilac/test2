@@ -1,0 +1,9 @@
+begin
+
+  x1 := 4;
+  print(x1);
+  x2 := 0;
+  x3 := x1 - x2;
+  print(x3);
+
+end.
