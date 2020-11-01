@@ -1,7 +1,10 @@
 %{
 #include <iostream>
 #include <cstdlib>
+#include <string>
+#include <vector>
 
+#include "ast.hpp"
 #define YYDEBUG 1
 using namespace std;
 
@@ -13,52 +16,144 @@ void yyerror(string s){
 extern int yylex();
 
 %}
+%union{
+	ExprAST *e;
+	int i;
+	string *s;
+	vector<ExprAST*> *v;
+	PrototypeAST *p;
+	vector<string> *v1;
+	FunctionAST *f;
+}
 
 %left '-' '+'
 %left '*' '/'
 
-%token print_token begin_token end_token dodela_token function_token num_token id_token
+%type<e> E Naredba
+%type<v> NizArgs NizArgs1 NizNaredbi NizFunkcija
+%type<p> Prototip
+%type<v1> Args Args1
+%type<f> Blok Funkcija
+%token<i> num_token
+%token<s> id_token
+
+%token print_token begin_token end_token dodela_token function_token  
 
 %%
 Program: Blok '.'
-| NizFunkcija Blok '.'
+{
+	$1->codegen();
+}
+| NizFunkcija Blok '.' {
+	for(unsigned i = 0; i < $1->size();i++)
+		(*$1)[i]->codegen();
+		
+	$2->codegen();
+}
 ;
-NizFunkcija: NizFunkcija Funkcija 
-| Funkcija
+NizFunkcija: NizFunkcija Funkcija {
+	$$ = $1;
+	$$->push_back($2);
+}	
+| Funkcija {
+	$$ = new vector<ExprAST*>();
+	$$->push_back($1);
+}
 ;
-Funkcija: function_token Prototip ':' NizNaredbi
+Funkcija: function_token Prototip ':' NizNaredbi {
+	$$ = new FunctionAST($2,*$4);
+	delete $4;
+}
 ;
-Blok: begin_token NizNaredbi end_token
+Blok: begin_token NizNaredbi end_token{
+	PrototypeAST *tmp = new PrototypeAST("begin_end_blok",vector<string>());
+	$$ = new FunctionAST(tmp,*$2);
+	delete $2;
+}	
 ;
-NizNaredbi: NizNaredbi Naredba ';'
-| Naredba ';'
+NizNaredbi: NizNaredbi Naredba ';' {
+	$$ = $1;
+	$$->push_back($2);
+}
+| Naredba ';' {
+	$$ = new vector<ExprAST *>();
+	$$->push_back($1);
+}
 ;
-Naredba: print_token '(' E ')'
-| id_token dodela_token E	
-| E
+Naredba: print_token '(' E ')' {}
+| id_token dodela_token E	{}
+| E {
+	$$ = $1;
+}
 ;
-Prototip: id_token '(' Args1 ')'
+Prototip: id_token '(' Args1 ')' {
+	$$ = new PrototypeAST(*$1,*$3);
+	delete $3;
+	delete $1;
+}
 ;
-Args1: Args
-| 
+Args1: Args {
+	$$ = $1;
+}
+| {
+	$$ = new vector<string>();
+}
 ;
-Args: Args ',' id_token
-| id_token
+Args: Args ',' id_token {
+	$$ = $1;
+	$$->push_back(*$3);
+	delete $3;
+}
+| id_token {
+	$$ = new vector<string>();
+	$$->push_back(*$1);
+	delete $1;
+}
 ;
-E : E '+' E
-| 	E '-' E
-|   E '*' E
-| 	E '/' E
-|   '(' E ')'
-|   num_token
-|   id_token
-|   id_token '(' NizArgs ')'
+E : E '+' E {
+	$$ = new AddAST($1,$3);
+}
+| 	E '-' E {
+	$$ = new SubAST($1,$3);
+}
+|   E '*' E {
+	$$ = new MulAST($1,$3);
+}
+| 	E '/' E {
+	$$ = new DivAST($1,$3);
+}
+|   '(' E ')'{
+	$$ = $2;
+}
+|   num_token {
+	$$ = new ConstantAST($1);
+}
+|   id_token {
+	$$ = new VariableAST(*$1);
+	delete $1;
+}
+|   id_token '(' NizArgs ')' {
+	//ovo je poziv funkcije
+	$$ = new CallAST(*$1,*$3);
+	delete $1;
+	delete $3;
+}
 ;
-NizArgs: NizArgs1
-| 
+NizArgs: NizArgs1 {
+	$$ = $1;
+}
+|	 {
+	$$ = new vector<ExprAST*>();
+}
 ;
-NizArgs1: NizArgs1 ',' E
-| E
+NizArgs1: NizArgs1 ',' E {
+	$$ = $1;
+	$$->push_back($3);
+}
+| E {
+	$$ = new vector<ExprAST*>();
+	$$->push_back($1);
+}
 ;
 
 
