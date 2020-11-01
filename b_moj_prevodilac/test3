@@ -1,9 +1,0 @@
-begin
-
- c := a;
- print(c + 4);
-
-end.
-
-function a():
-  ret 4;

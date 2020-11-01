@@ -14,13 +14,17 @@ using namespace std;
 %}
 
 %%
+"var"    return var_token;
+"extern" return extern_token;
 "begin" return begin_token;
 "end"   return end_token;
 "function" return function_token;
-"print"   return print_token;
 ":=" 	return dodela_token;
+if return if_token;
+then return then_token;
+else return else_token;
 
-[/][/]. { //ovo ignorisemo jer predstavljamo komentare na taj nacin
+[/][/].* { //ovo ignorisemo jer predstavljamo komentare na taj nacin
 }
 
 [a-zA-z][a-zA-z_0-9]* {
