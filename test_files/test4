@@ -1,6 +1,0 @@
-function ifThenElse(a):
-    if a then
-       a := 100
-    else
-       a := 0;
-
