@@ -1,5 +1,5 @@
-CPPFLAGS=$(shell llvm-config --cxxflags)
-LDFLAGS=$(shell llvm-config --libs --ldflags)
+CPPFLAGS=$(shell llvm-config-14 --cxxflags)
+LDFLAGS=$(shell llvm-config-14 --libs --ldflags)
 
 prevodilac: lex.yy.o parser.tab.o ast.o
 	clang++ -Wall $^ -o $@  $(LDFLAGS)
