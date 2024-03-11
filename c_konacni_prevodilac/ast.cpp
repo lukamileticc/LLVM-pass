@@ -20,7 +20,7 @@ Value* VariableAST::codegen() const{
 		exit(EXIT_FAILURE);
 	}
 	
-	return Builder.CreateLoad(tmp,Name.c_str());
+	return Builder.CreateLoad(tmp->getAllocatedType(),tmp,Name.c_str());
 }
 InnerExprAST::InnerExprAST(){
 	Vec.resize(0);
@@ -222,9 +222,9 @@ Function* FunctionAST::codegen() const{
 
   NamedValues.clear();
   for (auto &a : f->args()){
-	AllocaInst *alloca = CreateEntryBlockAlloca(f,a.getName());
+	AllocaInst *alloca = CreateEntryBlockAlloca(f,a.getName().str());
 	Builder.CreateStore(&a,alloca);
-    NamedValues[a.getName()] = alloca;
+    NamedValues[a.getName().str()] = alloca;
   }
   
    
@@ -250,14 +250,14 @@ void IntializeModuleAndPassManager() {
   
   TheFPM = new legacy::FunctionPassManager(TheModule);
   // Do simple "peephole" optimizations and bit-twiddling optzns.
-  TheFPM->add(createInstructionCombiningPass());
+//  TheFPM->add(createInstructionCombiningPass());
   // Reassociate expressions.
   TheFPM->add(createReassociatePass());
   // Eliminate Common SubExpressions.
   TheFPM->add(createNewGVNPass());
   // Simplify the control flow graph (deleting unreachable blocks, etc).
   TheFPM->add(createCFGSimplificationPass());
-  TheFPM->add(createPromoteMemoryToRegisterPass());
+//  TheFPM->add(createPromoteMemoryToRegisterPass());
 
   TheFPM->doInitialization();
 }
