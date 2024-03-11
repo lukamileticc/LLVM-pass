@@ -30,7 +30,7 @@ Kako dobiti kodove u *.ll* fomatu koji predstavljaju IR(Intermediate representat
 
 ## Kako pokrenuti prolaz: :wrench:
 Kada imamo kodove na IR jeziku potrebno je pozvati prolaz: <br>
- `opt -load /home/luka/llvm/build/lib/LLVMInstructionsCounterIR.so test1.ll`
+ `opt -load /home/luka/llvm/build/lib/LLVMInstructionsCounterIR.so -InstructionsCounterIR < test1.ll > /dev/null`
 
 ## Clanovi tima: :boy:
  * Luka Miletic 91/2017 :whale::whale:
